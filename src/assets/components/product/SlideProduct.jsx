@@ -1,61 +1,69 @@
-import NextIcon from '@/assets/components/icons/NextIcon';
-import PrevIcon from '@/assets/components/icons/PrevIcon';
+import React, { useState } from "react";
+import NextIcon from "@/assets/components/icons/NextIcon";
+import PrevIcon from "@/assets/components/icons/PrevIcon";
 
-import imgProducto1 from '../../images/image-product-1.jpg';
-import imgProducto2 from '../../images/image-product-2.jpg';
-import imgProducto3 from '../../images/image-product-3.jpg';
-import imgProducto4 from '../../images/image-product-4.jpg';
+// 📸 Importa las imágenes desde tu carpeta Movie
+import mando1 from "../../images/Movie/mando1.jpg";
+import stormtroper from "../../images/Movie/stormtroper.jpg";
+import vader from "../../images/Movie/vader.jpg";
+import estrella from "../../images/Movie/estrella_de_la_muerte.jpg";
 
-import { useState } from 'react';
+// Lista principal de imágenes
+const LISTA_IMG = [mando1, stormtroper, vader, estrella];
 
-import imgProduct1 from '../../images/image-product-1-thumbnail.jpg';
-import imgProduct2 from '../../images/image-product-2-thumbnail.jpg';
-import imgProduct3 from '../../images/image-product-3-thumbnail.jpg';
-import imgProduct4 from '../../images/image-product-4-thumbnail.jpg';
+const MovieCarousel = () => {
+  const [index, setIndex] = useState(0);
 
-const LISTA_IMG = [
-    imgProducto1,
-    imgProducto2,
-    imgProducto3,
-    imgProducto4,
-];
+  const handleNext = () => {
+    setIndex((prev) => (prev === LISTA_IMG.length - 1 ? 0 : prev + 1));
+  };
 
+  const handlePrev = () => {
+    setIndex((prev) => (prev === 0 ? LISTA_IMG.length - 1 : prev - 1));
+  };
 
-export default () => {
-    const  [index, setIndex]= useState(0);
+  return (
+    <section className="grid md:grid-cols-4 md:gap-4">
+      {/* Imagen principal */}
+      <div className="relative col-span-4">
+        <img
+          src={LISTA_IMG[index]}
+          alt={`Imagen ${index + 1}`}
+          className="aspect-[16/12] w-full object-cover rounded-xl shadow-lg"
+        />
 
-    const handleclickNext = () => {
-        index== LISTA_IMG.length - 1? setIndex(0) : setIndex(index + 1);
+        {/* Botones de navegación */}
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 flex justify-between w-full px-4">
+          <button
+            onClick={handlePrev}
+            className="w-10 h-10 bg-white/90 rounded-full shadow-md hover:bg-gray-100 transition grid place-items-center"
+            aria-label="Anterior"
+          >
+            <PrevIcon />
+          </button>
+          <button
+            onClick={handleNext}
+            className="w-10 h-10 bg-white/90 rounded-full shadow-md hover:bg-gray-100 transition grid place-items-center"
+            aria-label="Siguiente"
+          >
+            <NextIcon />
+          </button>
+        </div>
+      </div>
 
-   
-    };
-    const handleclickPrev = () => {
-       index=== 0 ? setIndex (LISTA_IMG.length - 1)  : setIndex(index - 1);
-   
-    };
-
-
-    return (
-        <section className="grid md:grid-cols-4 md:gap-4">
-            <div className='relative col-span-4'>
-                <img src={LISTA_IMG[index]} alt="" className='aspect-[16/12] w-full' />
-                <div className='absolute top-1/2 left-0 translate-y-1/2 justify-between px-4 flex w-full'>  
-                    <button className='w-10 h-10 bg-white rounded-full place-items-center grid'
-                        onClick= {handleclickPrev}>
-                        <PrevIcon />
-                    </button>
-                    <button className='w-10 h-10 bg-white rounded-full place-items-center grid'
-                      onClick= {handleclickNext}>
-                        <NextIcon />
-                    </button>
-                </div>
-            </div>
-            <img src={imgProduct1} alt="" className='hidden md:block' />
-            <img src={imgProduct2} alt="" className='hidden md:block' />
-            <img src={imgProduct3} alt="" className='hidden md:block' />
-            <img src={imgProduct4} alt="" className='hidden md:block' />
-
-        </section>
-    );
+      {/* Miniaturas (solo visibles en escritorio) */}
+      {LISTA_IMG.map((src, i) => (
+        <img
+          key={i}
+          src={src}
+          alt={`Miniatura ${i + 1}`}
+          onClick={() => setIndex(i)}
+          className={`hidden md:block cursor-pointer rounded-lg border-2 transition 
+            ${index === i ? "border-orange-500 opacity-100" : "border-transparent opacity-60 hover:opacity-100"}`}
+        />
+      ))}
+    </section>
+  );
 };
 
+export default MovieCarousel;

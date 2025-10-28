@@ -13,10 +13,8 @@ import demon_slayer from "../assets/images/Anime/demon_slayer.png"
 import Espada from "../assets/images/Anime/spada_demon.png"
 
 // --OTROS--
-import lito from "../assets/images/Otros/LITO.png"
-import Espada from "../assets/images/Anime/spada_demon.png"
-
-
+import lito from "../assets/images/Otros/LTIO.png"
+import miguel_angelo from "../assets/images/Otros/miguel_angelo_nose.png"
 
 export const allProducts = [
     // --- 10 Productos de Movie ---
@@ -33,7 +31,8 @@ export const allProducts = [
 
     //--- 10 productos de otro--
 
-    { id: 301, name: 'Espada nichirin', category: 'Anime', subCategory: 'Demon Slayer', color: 'Negro', price: 179.00, imageUrl: Espada, description: 'Corte moderno que se adapta a tu silueta.' },
+    { id: 301, name: 'Litofanias', category: 'Otros', subCategory: 'Litofanias', color: 'Blanco', price: 179.00, imageUrl: lito, description: 'Corte moderno que se adapta a tu silueta.' },
+    { id: 302, name: 'Busto de David', category: 'Otros', subCategory: 'Obras', color: 'Blanco', price: 179.00, imageUrl: miguel_angelo, description: 'Corte moderno que se adapta a tu silueta.' },
 
     //--- 10 productos de ropa--
 ];
