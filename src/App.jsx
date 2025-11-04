@@ -187,10 +187,14 @@ const App = () => {
 
     const renderPage = () => {
         switch (currentPage) {
-            case 'women':
-                return <CategoryPage title="Colección Mujer" category="Mujer" onAddToCart={addToCart} />;
-            case 'men':
-                return <CategoryPage title="Colección Hombre" category="Hombre" onAddToCart={addToCart} />;
+            case 'Anime':
+                return <CategoryPage title="anime" category="Anime" onAddToCart={addToCart} />;
+            case 'Movie':
+                return <CategoryPage title="movie" category="Movies" onAddToCart={addToCart} />;
+            case 'Otros':
+                return <CategoryPage title="otros" category="Otros" onAddToCart={addToCart} />;
+
+
             case 'cart':
                 return (
                     <CartPage 

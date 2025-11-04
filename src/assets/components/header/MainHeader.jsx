@@ -18,7 +18,12 @@ const LogoutIcon = () => (
 );
 
 const MainHeader = ({ navigateTo, currentUser, onLogout, onShowLogin, onShowProfilePhoto, cartItemCount, onCartClick }) => {
-    const COMPANY_NAME = "Onix3d";
+    const COMPANY_NAME = (
+        <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-black">
+            ONIX3D
+        </span>
+    );
+
     const [navClass, setnavClass] = useState("hidden font-bold md:mr-auto md:gap-4 md:flex md:flex-row top-0 left-0 p-8 md:static md:p-0 md:h-auto");
     const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -32,14 +37,14 @@ const MainHeader = ({ navigateTo, currentUser, onLogout, onShowLogin, onShowProf
 
     return (
         <>
-            <header className='container mx-auto flex items-center px-4 gap-8 bg-white h-20 border-b border-gray-200 sticky top-0 z-50 shadow-sm'>
+            <header className='container mx-auto flex items-center px-4 gap-8 bg-black h-20 border-b border-gray-200 sticky top-0 z-50 shadow-sm'>
                 <button className='md:hidden hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200' onClick={handleOpenMenu}>
                     <MenuIcon />
                 </button>
                 
                 <div 
                     onClick={() => navigateTo('home')} 
-                    className='mr-auto md:mr-0 font-black text-3xl text-gray-900 tracking-wider cursor-pointer hover:text-gray-700 transition-colors duration-200'
+                    className='mr-auto md:mr-0 font-black text-3xl text-white tracking-wider cursor-pointer hover:text-gray-700 transition-colors duration-200'
                 >
                     {COMPANY_NAME}
                 </div>
@@ -48,8 +53,9 @@ const MainHeader = ({ navigateTo, currentUser, onLogout, onShowLogin, onShowProf
                     <button className='mb-12 md:hidden hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200 self-start' onClick={handleClosedMenu}>
                         <CloseIcon />
                     </button>
-                    <NavLinkHeader text="Hombre" onClick={() => { navigateTo('men'); handleClosedMenu(); }} />
-                    <NavLinkHeader text="Mujer" onClick={() => { navigateTo('women'); handleClosedMenu(); }} />
+                    <NavLinkHeader text="Anime" onClick={() => { navigateTo('Anime'); handleClosedMenu(); }} />
+                    <NavLinkHeader text="Movie" onClick={() => { navigateTo('Movie'); handleClosedMenu(); }} />
+                    <NavLinkHeader text="Otros" onClick={() => { navigateTo('Otros'); handleClosedMenu(); }} />
                     <NavLinkHeader text="Acerca de" onClick={() => { navigateTo('about'); handleClosedMenu(); }} />
                 </nav>
                 
@@ -86,7 +92,7 @@ const MainHeader = ({ navigateTo, currentUser, onLogout, onShowLogin, onShowProf
                                         {currentUser.name.charAt(0).toUpperCase()}
                                     </div>
                                 )}
-                                <span className="hidden sm:block font-semibold text-gray-700 text-sm">
+                                <span className="hidden sm:block font-semibold text-gray-200 text-sm">
                                     ¡Hola, {currentUser.name.split(' ')[0]}!
                                 </span>
                                 {/* Flecha dropdown */}
