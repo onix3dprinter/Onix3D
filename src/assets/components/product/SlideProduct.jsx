@@ -29,7 +29,7 @@ const MovieCarousel = () => {
         <img
           src={LISTA_IMG[index]}
           alt={`Imagen ${index + 1}`}
-          className="aspect-[16/12] w-full object-cover rounded-xl shadow-lg"
+          className="aspect-[16/12] w-full object-cover object-center rounded-xl shadow-lg"
         />
 
         {/* Botones de navegación */}
@@ -58,7 +58,7 @@ const MovieCarousel = () => {
           src={src}
           alt={`Miniatura ${i + 1}`}
           onClick={() => setIndex(i)}
-          className={`hidden md:block cursor-pointer rounded-lg border-2 transition 
+          className={`hidden md:block cursor-pointer rounded-lg border-2 transition object-cover object-center
             ${index === i ? "border-orange-500 opacity-100" : "border-transparent opacity-60 hover:opacity-100"}`}
         />
       ))}

@@ -24,9 +24,9 @@ export default () => {
 
             </p>
             <div className="mb-5 grid grid-cols-3 items-center gap-4 font-bold md:grid-cols-2">
-                <span className="text-3xl">$125.00</span>
+                <span className="text-3xl">$25k</span>
                 <span className="mr-auto rounded-md bg-purple-200 py-1 px-2 text-purple-700">50%</span>
-                <span className="text-right text-lg text-grayish-blue line-through md:text-left">$250.00</span>
+                <span className="text-right text-lg text-grayish-blue line-through md:text-left">$50k</span>
             </div>
             <div className="grid grid-cols-3 gap-4 font-bold md:grid-cols-[1fr_2fr]">
                 <div className="col-span-3 flex items-center justify-between rounded-md bg-gray-200 py-3 px-5 md:col-span-1">

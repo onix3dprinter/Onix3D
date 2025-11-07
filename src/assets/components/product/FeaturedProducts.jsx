@@ -1,57 +1,56 @@
 import React from 'react';
-
-// --- ESTUDIANTES: Aquí definirían los productos a mostrar en el inicio. ---
-// Más adelante, estos datos vendrán de una base de datos o una API.
-// Personalicen estos productos para que coincidan con los de sus empresas.
-
-// --- PARA AGREGAR SUS PROPIAS IMÁGENES LOCALES: ---
-// 1. Guarden sus imágenes de producto en esa carpeta (ej: mi-producto.jpg).
-// 2. Importen cada imagen al principio de este archivo, dándole un nombre de variable. Por ejemplo:
-//    import fotoCamisaCoral from '@/assets/images/camisa-coral.jpg';
-//    import fotoShortsIndigo from '@/assets/images/shorts-indigo.jpg';
-// 3. Finalmente, en la lista de abajo, reemplacen la URL de 'imageUrl' por la variable que acaban de crear.
-//    Ejemplo: imageUrl: fotoCamisaCoral,
+import demon_slayer from "@/assets/images/Anime/demon_slayer.png"
+import soporte_carrete from "@/assets/images/Otros/soporte_carrete.png"
+import santa_familia from "@/assets/images/Otros/santa_familia.png"
+import Abraza_caras from "@/assets/images/Movie/abraza_caras.png"
 
 const featuredProducts = [
     {
-        id: 1,
+        id: 'featured-1',
         name: 'Porta vasos Demon slayer',
         category: 'Anime',
-        price: 79.99,
-        imageUrl: 'https://placehold.co/600x800/fecaca/fb7185?text=Colección+Verano', // Rosa claro vibrante  -- Acá img
-        bgColor: 'bg-rose-100', // Color de fondo para la tarjeta
+        price: 50,
+        imageUrl: demon_slayer,
+        bgColor: 'bg-rose-100',
         hoverBgColor: 'hover:bg-rose-200',
     },
     {
-        id: 3,
+        id: 'featured-2',
         name: 'soporte de carrete',
-        category: 'Collection',
-        price: 129.99,
-        imageUrl: 'https://placehold.co/600x800/ffedd5/f97316?text=Primavera+Casual', // Naranja vibrante -- Acá img
+        category: 'Otros',
+        price: 25,
+        imageUrl: soporte_carrete,
         bgColor: 'bg-orange-100',
         hoverBgColor: 'hover:bg-orange-200',
     },
     {
-        id: 6,
+        id: 'featured-3',
         name: 'litofanias',
-        category: 'Collection',
-        price: 149.99,
-        imageUrl: 'https://placehold.co/600x800/dbeafe/3b82f6?text=Denim+Esencial', // Azul denim
+        category: 'Otros',
+        price: 45,
+        imageUrl: santa_familia,
         bgColor: 'bg-indigo-100',
         hoverBgColor: 'hover:bg-indigo-200',
     },
     {
-        id: 8,
+        id: 'featured-4',
         name: 'Abraza caras',
         category: 'Movie',
-        price: 35.00,
-        imageUrl: 'https://placehold.co/600x800/1f2937/4b5563?text=Estilo+Urbano', // Negro grisáceo
+        price: 25,
+        imageUrl: Abraza_caras,
         bgColor: 'bg-slate-100',
         hoverBgColor: 'hover:bg-slate-200',
     },
 ];
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({ navigateTo }) => { // ← Prop agregada
+
+    const handleViewProduct = (category) => {
+        if (navigateTo) {
+            navigateTo(category);
+        }
+    };
+
     return (
         <section className="container mx-auto my-20 px-4 py-12 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl shadow-xl animate-fade-in">
             <div className="text-center mb-16 animate-slide-down">
@@ -82,7 +81,10 @@ const FeaturedProducts = () => {
                             <h3 className="text-2xl font-bold text-gray-800 mb-2">{product.name}</h3>
                             <p className="text-md text-gray-600 mb-3">{product.category}</p>
                             <p className="text-xl font-extrabold text-gray-900">${product.price.toFixed(2)}</p>
-                            <button className="mt-6 font-bold text-white py-3 px-8 rounded-full bg-orange-500 shadow-md shadow-orange-500/30 hover:bg-orange-600 transition-all duration-300 transform group-hover:-translate-y-1">
+                            <button 
+                                onClick={() => handleViewProduct(product.category)}
+                                className="mt-6 font-bold text-white py-3 px-8 rounded-full bg-orange-500 shadow-md shadow-orange-500/30 hover:bg-orange-600 transition-all duration-300 transform group-hover:-translate-y-1 cursor-pointer"
+                            >
                                 Ver Producto
                             </button>
                         </div>

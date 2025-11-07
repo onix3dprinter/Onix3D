@@ -1,29 +1,32 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import moviee from "@/assets/images/banners/movie.jpeg"
+import otro from "@/assets/images/banners/3dbanner.jpeg"
+import animee from "@/assets/images/banners/anime.png"
 
 // ESTUDIANTES: Aquí es donde deben personalizar para sus empresas.
 // Cambien las imágenes, títulos y subtítulos para que coincidan con su colección o productos destacados.
 const collectionSlides = [
     {
-        // Reemplacen esta URL con la imagen de su producto/colección.
-        img: 'https://placehold.co/1200x800/06b6d4/ffffff?text=Colección+Aqua',
-        // Cambien el título para que coincida con su imagen.
-        title: 'Organizadores',
-        // Y el subtítulo también.
-        subtitle: 'organiza tu vida.'
+        img: otro,
+        title: 'Imaginacion',
+        subtitle: 'Todo al alcance.',
+        category: 'Otros' // ← Agregado
     },
     {
-        img: 'https://placehold.co/1200x800/8b5cf6/ffffff?text=Vibra+Nocturna',
+        img: animee,
         title: 'Anime',
-        subtitle: 'Animes a tu gusto.'
+        subtitle: 'Animes a tu gusto.',
+        category: 'Anime' // ← Agregado
     },
     {
-        img: 'https://placehold.co/1200x800/f97316/ffffff?text=Sol+de+Verano',
+        img: moviee,
         title: 'Movies',
-        subtitle: 'Diferente mundos.'
+        subtitle: 'Diferente mundos.',
+        category: 'Movie' // ← Agregado
     },
 ];
 
-const PromotionalBanners = () => {
+const PromotionalBanners = ({ navigateTo }) => { // ← Prop agregada
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextSlide = useCallback(() => {
@@ -37,6 +40,12 @@ const PromotionalBanners = () => {
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
+    };
+
+    const handleDiscoverClick = (category) => {
+        if (navigateTo) {
+            navigateTo(category);
+        }
     };
 
     return (
@@ -65,9 +74,12 @@ const PromotionalBanners = () => {
                          <div className="overflow-hidden">
                              <p key={currentIndex + 'sub'} className="text-lg mb-4 animate-slide-up-delay">{collectionSlides[currentIndex].subtitle}</p>
                          </div>
-                        <a href="#" className="mt-2 inline-block font-semibold bg-white text-gray-800 py-3 px-8 rounded-full shadow-lg hover:bg-orange-400 hover:text-white transition-all duration-300 transform group-hover:scale-105">
+                        <button 
+                            onClick={() => handleDiscoverClick(collectionSlides[currentIndex].category)}
+                            className="mt-2 inline-block font-semibold bg-white text-gray-800 py-3 px-8 rounded-full shadow-lg hover:bg-orange-400 hover:text-white transition-all duration-300 transform group-hover:scale-105 cursor-pointer"
+                        >
                             Descubrir
-                        </a>
+                        </button>
                     </div>
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                         {collectionSlides.map((_, index) => (
@@ -87,7 +99,7 @@ const PromotionalBanners = () => {
                     
                     <div className="relative z-10 text-center text-white bg-white/10 backdrop-blur-xl p-8 rounded-lg border border-white/20 shadow-lg">
                         <h3 className="text-3xl font-bold mb-2 transition-transform duration-500 group-hover:scale-105">Únete al Club</h3>
-                        <p className="mb-4 text-md">Acceso a lanzamientos y eventos.</p>
+                        <p className="mb-4 text-md">Notificaciones de nuevos productos.</p>
                         <a href="#" className="mt-2 inline-block font-semibold bg-orange-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-gray-800 transition-all duration-300 transform group-hover:scale-105">
                             Suscribirse
                         </a>

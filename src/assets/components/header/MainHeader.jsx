@@ -56,6 +56,7 @@ const MainHeader = ({ navigateTo, currentUser, onLogout, onShowLogin, onShowProf
                     <NavLinkHeader text="Anime" onClick={() => { navigateTo('Anime'); handleClosedMenu(); }} />
                     <NavLinkHeader text="Movie" onClick={() => { navigateTo('Movie'); handleClosedMenu(); }} />
                     <NavLinkHeader text="Otros" onClick={() => { navigateTo('Otros'); handleClosedMenu(); }} />
+                    <NavLinkHeader text="Sublimacion" onClick={() => { navigateTo('Sublimacion'); handleClosedMenu(); }} />
                     <NavLinkHeader text="Acerca de" onClick={() => { navigateTo('about'); handleClosedMenu(); }} />
                 </nav>
                 

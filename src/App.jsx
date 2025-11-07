@@ -11,11 +11,11 @@ import LoginModal from './assets/components/modals/LoginModal.jsx';
 import ProfilePhotoModal from './assets/components/modals/ProfilePhotoModal.jsx';
 import { users } from '../src/data/user.js';
 
-const HomePage = () => (
+const HomePage = ({ navigateTo }) => (
     <>
         <MainProduct />
-        <PromocionBanner />
-        <FeaturedProducts />
+        <PromocionBanner navigateTo={navigateTo} />
+        <FeaturedProducts navigateTo={navigateTo} />
         <FooterProduct />
     </>
 );
@@ -152,6 +152,9 @@ const App = () => {
                 return [...prevCart, { ...product, quantity: 1 }];
             }
         });
+
+        // Feedback visual
+        console.log('Producto agregado:', product.name);
     };
 
     const updateQuantity = (productId, newQuantity) => {
@@ -188,12 +191,13 @@ const App = () => {
     const renderPage = () => {
         switch (currentPage) {
             case 'Anime':
-                return <CategoryPage title="anime" category="Anime" onAddToCart={addToCart} />;
+                return <CategoryPage title="Anime" category="Anime" onAddToCart={addToCart} />;
             case 'Movie':
-                return <CategoryPage title="movie" category="Movies" onAddToCart={addToCart} />;
+                return <CategoryPage title="Movie" category="Movies" onAddToCart={addToCart} />;
             case 'Otros':
-                return <CategoryPage title="otros" category="Otros" onAddToCart={addToCart} />;
-
+                return <CategoryPage title="Otros" category="Otros" onAddToCart={addToCart} />;
+            case 'Sublimacion':
+                return <CategoryPage title="Sublimacion" category="Sublimacion" onAddToCart={addToCart} />;
 
             case 'cart':
                 return (
@@ -205,9 +209,69 @@ const App = () => {
                     />
                 );
             case 'about':
-                return <div className="container mx-auto py-20 px-4"><h1 className="text-4xl font-bold">Acerca de Nosotros</h1></div>;
+                return (
+                    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-orange-50 to-pink-50 py-16 px-4">
+                        <div className="container mx-auto max-w-4xl">
+                            {/* Título principal */}
+                            <div className="text-center mb-12">
+                                <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Acerca deNosotros</span>
+                                </h1>
+                                <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+                            </div>
+
+                            {/* Contenido principal */}
+                            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8">
+                                <p className="text-lg md:text-xl text-gray-700 text-center leading-relaxed mb-8">
+                                    Somos una empresa especializada en <span className="font-semibold text-blue-600">impresión 3D</span> en la cual podemos hacer lo que imagines, además de <span className="font-semibold text-purple-600">estampado de camisas, gorras y tazas</span>.
+                                </p>
+
+                                {/* Sección de servicios */}
+                                <div className="grid md:grid-cols-3 gap-6 mt-12">
+                                    {/* Impresión 3D */}
+                                    <div className="text-center p-6 rounded-xl bg-gradient-to-br from-orange-100 to-orange-50 hover:shadow-lg transition">
+                                        <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <span className="text-3xl">🖨️</span>
+                                        </div>
+                                        <h3 className="font-bold text-xl text-gray-800 mb-2">Impresión 3D</h3>
+                                        <p className="text-gray-600">Creamos cualquier diseño que imagines con tecnología de punta</p>
+                                    </div>
+
+                                    {/* Estampados */}
+                                    <div className="text-center p-6 rounded-xl bg-gradient-to-br from-pink-100 to-pink-50 hover:shadow-lg transition">
+                                        <div className="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <span className="text-3xl">👕</span>
+                                        </div>
+                                        <h3 className="font-bold text-xl text-gray-800 mb-2">Estampados</h3>
+                                        <p className="text-gray-600">Camisas y gorras personalizadas con tus diseños favoritos</p>
+                                    </div>
+
+                                    {/* Personalización */}
+                                    <div className="text-center p-6 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 hover:shadow-lg transition">
+                                        <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <span className="text-3xl">☕</span>
+                                        </div>
+                                        <h3 className="font-bold text-xl text-gray-800 mb-2">Tazas Custom</h3>
+                                        <p className="text-gray-600">Tazas personalizadas perfectas para regalar o coleccionar</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Llamado a la acción */}
+                            <div className="text-center">
+                                <p className="text-gray-600 mb-6 text-lg">¿Tienes una idea en mente?</p>
+                                <button 
+                                    onClick={() => navigateTo('home')}
+                                    className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-full hover:shadow-lg transform hover:scale-105 transition"
+                                >
+                                    Explora nuestros productos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
             default:
-                return <HomePage />;
+                return <HomePage navigateTo={navigateTo} />;
         }
     };
 
@@ -218,7 +282,7 @@ const App = () => {
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-gray-50">
+            <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 via-orange-50 to-pink-50">
                 <div className="text-center">
                     <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mb-4"></div>
                     <p className="text-gray-600 font-semibold">Cargando...</p>
